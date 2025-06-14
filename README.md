@@ -532,6 +532,63 @@ The API handles various error scenarios:
 - 400: Validation errors
 - 500: Server errors
 
+## Error Responses Examples
+
+#### Get User by ID (404 Not Found)
+```bash
+curl -X GET http://localhost:3000/api/users/NONEXISTENT
+```
+
+Response:
+```json
+{
+  "status": "error",
+  "message": "User with ID NONEXISTENT not found"
+}
+```
+
+#### Update User (404 Not Found)
+```bash
+curl -X PUT \
+  http://localhost:3000/api/users/NONEXISTENT \
+  -H "Content-Type: application/json" \
+  -d '{...}'
+```
+
+Response:
+```json
+{
+  "status": "error",
+  "message": "User with ID NONEXISTENT not found"
+}
+```
+
+#### Delete User (404 Not Found)
+```bash
+curl -X DELETE http://localhost:3000/api/users/NONEXISTENT
+```
+
+Response:
+```json
+{
+  "status": "error",
+  "message": "User with ID NONEXISTENT not found"
+}
+```
+
+#### Get All Users (Empty Database)
+```bash
+curl -X GET http://localhost:3000/api/users
+```
+
+Response:
+```json
+{
+  "status": "error",
+  "message": "No users found"
+}
+```
+
 ## Docker Support
 
 Build and run with Docker:

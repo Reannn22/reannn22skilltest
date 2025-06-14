@@ -11,42 +11,58 @@ app.set('json spaces', 2);
 
 app.use(express.json());
 
-// Improved MongoDB connection with options
+// Routes
+app.use('/api/users', userRoutes);
+
+// Catch-all for unmatched routes
+app.use((req, res, next) => {
+  res.status(404).json({
+    message: 'Endpoint not found',
+    path: req.originalUrl,
+    method: req.method
+  });
+});
+
+// Error handler - must be last middleware
+app.use(errorHandler);
+
+// MongoDB Connection
 mongoose.connect(process.env.MONGODB_URI, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
   serverSelectionTimeoutMS: 5000, // Timeout after 5s instead of 30s
   connectTimeoutMS: 10000, // Give up initial connection after 10s
 })
-.then(() => {
-  console.log('Connected to MongoDB successfully');
-})
-.catch((err) => {
-  console.error('MongoDB connection error:', err);
-  process.exit(1);
-});
+  .then(() => console.log('Connected to MongoDB successfully'))
+  .catch((error) => {
+    console.error('MongoDB connection error:', error);
+    process.exit(1);
+  });
 
-// Connection error handling
+// Error handling for MongoDB connection
 mongoose.connection.on('error', (err) => {
-  console.error('MongoDB connection error:', err);
+  console.error('MongoDB error:', err);
 });
 
 mongoose.connection.on('disconnected', () => {
   console.log('MongoDB disconnected');
 });
 
-// Routes
-app.use('/api/users', userRoutes);
+// Start server
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => {
+  console.log(`Server is running on port ${PORT}`);
+});
 
+// Global error handling
+process.on('unhandledRejection', (error) => {
+  console.error('Unhandled Rejection:', error);
+  process.exit(1);
+});
 
 app.get('/', (req, res) => {
   res.send('Server running & connected to MongoDB 🚀');
 });
 
-// Error handling middleware
-app.use(errorHandler);
 
-const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}`);
-});
+

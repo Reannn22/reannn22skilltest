@@ -5,10 +5,15 @@ class UserService {
   async createUser(userData) {
     return await User.create(userData);
   }
-
+  
   async getAllUsers() {
-    return await User.find().lean();
-  }
+    const users = await User.find().lean();
+    if (users.length === 0) {
+     throw new NotFoundError('No users found');
+    }
+    return users;
+}
+
 
   async getUserById(employeeId) {
     const user = await User.findOne({ employeeId }).lean();
@@ -21,8 +26,12 @@ class UserService {
   async updateUser(employeeId, updateData) {
     const user = await User.findOneAndUpdate(
       { employeeId },
-      updateData,
-      { new: true, runValidators: true }
+      { $set: updateData },
+      { 
+        new: true, 
+        runValidators: true,
+        context: 'query'
+      }
     ).lean();
     
     if (!user) {

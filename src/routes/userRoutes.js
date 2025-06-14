@@ -102,15 +102,46 @@ const formatUserResponse = (user) => ({
   updatedAt: user.updatedAt
 });
 
+// Add update validation middleware
+const updateValidation = [
+  body('name.first')
+    .optional()
+    .trim()
+    .notEmpty()
+    .withMessage('First name cannot be empty'),
+  
+  body('name.last')
+    .optional()
+    .trim()
+    .notEmpty()
+    .withMessage('Last name cannot be empty'),
+  
+  body('email')
+    .optional()
+    .trim()
+    .isEmail()
+    .withMessage('Invalid email format')
+    .normalizeEmail(),
+  
+  body('phoneNumber.primary')
+    .optional()
+    .trim()
+    .matches(/^[0-9]{10,}$/)
+    .withMessage('Primary phone number must contain at least 10 digits and only numbers'),
+  
+  body('department')
+    .optional()
+    .trim()
+    .isIn(['Engineering', 'Marketing', 'Sales', 'HR', 'Finance', 'Operations', 'IT', 'Customer Support'])
+    .withMessage('Invalid department')
+];
+
 // Routes
 router.post('/', userValidation, handleValidationErrors, userController.createUser);
 router.get('/', userController.getAllUsers);
 router.get('/:employeeId', userController.getUserById);
-router.put('/:employeeId', userValidation, handleValidationErrors, userController.updateUser);
+router.put('/:employeeId', updateValidation, handleValidationErrors, userController.updateUser);
 router.delete('/:employeeId', userController.deleteUser);
 router.delete('/', userController.deleteAllUsers);
-
-module.exports = router;
-
 
 module.exports = router;
