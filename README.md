@@ -117,17 +117,335 @@ http://localhost:3000/api/users
 - Position is required
 - EmployeeId is required and must be unique
 
-### Response Format
+## API Documentation with Examples
+
+### 1. Create User (POST /api/users)
+
+```bash
+curl -X POST \
+  http://localhost:3000/api/users \
+  -H "Content-Type: application/json" \
+  -d '{
+    "name": {
+      "first": "Ahmad",
+      "last": "Firdaus"
+    },
+    "email": "ahmad.firdaus@company.co.id",
+    "phoneNumber": {
+      "primary": "081234567890",
+      "secondary": "087711223344"
+    },
+    "department": "IT",
+    "position": "Developer",
+    "employeeId": "EMP001",
+    "isActive": true,
+    "joiningDate": "2024-01-15",
+    "address": {
+      "street": "123 Main St",
+      "city": "City",
+      "state": "State",
+      "country": "Country",
+      "zipCode": "12345"
+    },
+    "emergencyContact": {
+      "name": "Jane Doe",
+      "relationship": "Spouse",
+      "phoneNumber": "1234567890"
+    },
+    "skills": ["JavaScript", "Node.js"],
+    "education": [{
+      "degree": "Bachelor",
+      "institution": "University",
+      "year": 2020
+    }],
+    "socialMedia": {
+      "linkedin": "linkedin.com/johndoe",
+      "twitter": "@johndoe",
+      "github": "github.com/johndoe"
+    },
+    "notes": "Some notes"
+  }'
+```
 
 Success Response:
 ```json
 {
   "status": "success",
-  "message": "Operation successful",
+  "message": "User created successfully",
   "data": {
     "user": {
-      // user data
+      "name": {
+        "first": "Ahmad",
+        "last": "Firdaus",
+        "fullName": "Ahmad Firdaus"
+      },
+      "email": "ahmad.firdaus@company.co.id",
+      "phoneNumber": {
+        "primary": "081234567890",
+        "secondary": "087711223344"
+      },
+      "department": "IT",
+      "position": "Developer",
+      "employeeId": "EMP001",
+      "isActive": true,
+      "joiningDate": "2024-01-15",
+      "address": {
+        "street": "123 Main St",
+        "city": "City",
+        "state": "State",
+        "country": "Country",
+        "zipCode": "12345"
+      },
+      "emergencyContact": {
+        "name": "Jane Doe",
+        "relationship": "Spouse",
+        "phoneNumber": "1234567890"
+      },
+      "skills": ["JavaScript", "Node.js"],
+      "education": [{
+        "degree": "Bachelor",
+        "institution": "University",
+        "year": 2020
+      }],
+      "socialMedia": {
+        "linkedin": "linkedin.com/johndoe",
+        "twitter": "@johndoe",
+        "github": "github.com/johndoe"
+      },
+      "notes": "Some notes"
     }
+  }
+}
+```
+
+### 2. Get User by ID (GET /api/users/:employeeId)
+
+```bash
+curl -X GET http://localhost:3000/api/users/EMP011
+```
+
+Success Response:
+```json
+{
+  "status": "success",
+  "message": "User retrieved successfully",
+  "data": {
+    "user": {
+      "name": {
+        "first": "Ahmad",
+        "last": "Firdaus",
+        "fullName": "Ahmad Firdaus"
+      },
+      "email": "ahmad.firdaus@company.co.id",
+      "phoneNumber": {
+        "primary": "081234567890",
+        "secondary": "087711223344"
+      },
+      "department": "IT",
+      "position": "Developer",
+      "employeeId": "EMP001",
+      "isActive": true,
+      "joiningDate": "2024-01-15",
+      "address": {
+        "street": "123 Main St",
+        "city": "City",
+        "state": "State",
+        "country": "Country",
+        "zipCode": "12345"
+      },
+      "emergencyContact": {
+        "name": "Jane Doe",
+        "relationship": "Spouse",
+        "phoneNumber": "1234567890"
+      },
+      "skills": ["JavaScript", "Node.js"],
+      "education": [{
+        "degree": "Bachelor",
+        "institution": "University",
+        "year": 2020
+      }],
+      "socialMedia": {
+        "linkedin": "linkedin.com/johndoe",
+        "twitter": "@johndoe",
+        "github": "github.com/johndoe"
+      },
+      "notes": "Some notes"
+    }
+  }
+}
+```
+
+### 3. Get All Users (GET /api/users)
+
+```bash
+curl -X GET http://localhost:3000/api/users/
+```
+
+Success Response:
+```json
+{
+  "status": "success",
+  "message": "Users retrieved successfully",
+  "data": {
+    "users": [
+      {
+        "name": {
+          "first": "Ahmad",
+          "last": "Firdaus",
+          "fullName": "Ahmad Firdaus"
+        },
+        "email": "ahmad.firdaus@company.co.id",
+        "phoneNumber": {
+          "primary": "081234567890",
+          "secondary": "087711223344"
+        },
+        "department": "IT",
+        "position": "Developer",
+        "employeeId": "EMP001",
+        "isActive": true,
+        "joiningDate": "2024-01-15",
+        "address": {
+          "street": "123 Main St",
+          "city": "City",
+          "state": "State",
+          "country": "Country",
+          "zipCode": "12345"
+        },
+        "emergencyContact": {
+          "name": "Jane Doe",
+          "relationship": "Spouse",
+          "phoneNumber": "1234567890"
+        },
+        "skills": ["JavaScript", "Node.js"],
+        "education": [{
+          "degree": "Bachelor",
+          "institution": "University",
+          "year": 2020
+        }],
+        "socialMedia": {
+          "linkedin": "linkedin.com/johndoe",
+          "twitter": "@johndoe",
+          "github": "github.com/johndoe"
+        },
+        "notes": "Some notes"
+      }
+    ]
+  }
+}
+```
+
+### 4. Update User (PUT /api/users/:employeeId)
+
+```bash
+curl -X PUT \
+  http://localhost:3000/api/users/EMP011 \
+  -H "Content-Type: application/json" \
+  -d '{
+    "name": {
+      "first": "Ahmad",
+      "last": "Updated"
+    },
+    "email": "ahmad.updated@company.co.id",
+    "phoneNumber": {
+      "primary": "081234567891",
+      "secondary": "087711223345"
+    },
+    "department": "IT",
+    "position": "Senior Developer",
+    "employeeId": "EMP001",
+    "isActive": true,
+    "joiningDate": "2024-01-15",
+    "address": {
+      "street": "123 Main St",
+      "city": "City",
+      "state": "State",
+      "country": "Country",
+      "zipCode": "12345"
+    },
+    "emergencyContact": {
+      "name": "Jane Doe",
+      "relationship": "Spouse",
+      "phoneNumber": "1234567890"
+    },
+    "skills": ["JavaScript", "Node.js", "React"],
+    "education": [{
+      "degree": "Bachelor",
+      "institution": "University",
+      "year": 2020
+    }],
+    "socialMedia": {
+      "linkedin": "linkedin.com/johndoe",
+      "twitter": "@johndoe",
+      "github": "github.com/johndoe"
+    },
+    "notes": "Some updated notes"
+  }'
+```
+
+Success Response:
+```json
+{
+  "status": "success",
+  "message": "User updated successfully",
+  "data": {
+    "user": {
+      "name": {
+        "first": "Ahmad",
+        "last": "Updated",
+        "fullName": "Ahmad Updated"
+      },
+      "email": "ahmad.updated@company.co.id",
+      "phoneNumber": {
+        "primary": "081234567891",
+        "secondary": "087711223345"
+      },
+      "department": "IT",
+      "position": "Senior Developer",
+      "employeeId": "EMP001",
+      "isActive": true,
+      "joiningDate": "2024-01-15",
+      "address": {
+        "street": "123 Main St",
+        "city": "City",
+        "state": "State",
+        "country": "Country",
+        "zipCode": "12345"
+      },
+      "emergencyContact": {
+        "name": "Jane Doe",
+        "relationship": "Spouse",
+        "phoneNumber": "1234567890"
+      },
+      "skills": ["JavaScript", "Node.js", "React"],
+      "education": [{
+        "degree": "Bachelor",
+        "institution": "University",
+        "year": 2020
+      }],
+      "socialMedia": {
+        "linkedin": "linkedin.com/johndoe",
+        "twitter": "@johndoe",
+        "github": "github.com/johndoe"
+      },
+      "notes": "Some updated notes"
+    }
+  }
+}
+```
+
+### 5. Delete User (DELETE /api/users/:employeeId)
+
+```bash
+curl -X DELETE http://localhost:3000/api/users/EMP012
+```
+
+Success Response:
+```json
+{
+  "status": "success",
+  "message": "User with ID EMP012 deleted successfully",
+  "data": {
+    "deletedCount": 1
   }
 }
 ```
@@ -136,15 +454,47 @@ Error Response:
 ```json
 {
   "status": "error",
-  "message": "Error message",
-  "errors": [
-    {
-      "field": "fieldName",
-      "message": "Error description"
-    }
-  ]
+  "message": "User with ID EMP011 not found"
 }
 ```
+
+### 6. Delete All Users (DELETE /api/users)
+
+```bash
+curl -X DELETE http://localhost:3000/api/users
+```
+
+Success Response:
+```json
+{
+  "status": "success",
+  "message": "All users deleted successfully",
+  "data": {
+    "deletedCount": 2
+  }
+}
+```
+
+## Response Format
+
+All API endpoints return responses in a consistent format:
+
+```json
+{
+  "status": "success|error",
+  "message": "Description of what happened",
+  "data": {
+    // Response data or error details
+  }
+}
+```
+
+## Error Handling
+
+The API handles various error scenarios:
+- 404: Resource not found
+- 400: Validation errors
+- 500: Server errors
 
 ## Docker Support
 
