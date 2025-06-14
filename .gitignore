@@ -45,3 +45,4 @@ coverage/
 *.tgz
 .npm/
 .yarn-integrity
+.vercel

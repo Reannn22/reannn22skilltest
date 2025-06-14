@@ -4,7 +4,10 @@
   "main": "index.js",
   "scripts": {
     "start": "node src/index.js",
-    "dev": "nodemon src/index.js"
+    "dev": "nodemon src/index.js",
+    "build": "npm install",
+    "vercel-build": "echo 'Building...'",
+    "deploy": "vercel deploy --prod"
   },
   "dependencies": {
     "dotenv": "^16.3.1",
