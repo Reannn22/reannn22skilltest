@@ -24,11 +24,11 @@ COPY --from=builder /app ./
 
 # Set environment variables
 ENV NODE_ENV=production
-ENV PORT=4000
+ENV PORT=3001
 ENV MONGODB_URI=mongodb+srv://reyhan123140022:t9JyfK1LQTI8zops@cluster0.i2yv1.mongodb.net/skilltest?retryWrites=true&w=majority&appName=Cluster0
 
 # Expose port
-EXPOSE 4000
+EXPOSE 3001
 
 # Start the application
 CMD ["node", "src/index.js"]

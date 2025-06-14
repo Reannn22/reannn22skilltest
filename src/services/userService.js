@@ -51,7 +51,7 @@ class UserService {
   async deleteAllUsers() {
     const result = await User.deleteMany({});
     if (result.deletedCount === 0) {
-      throw new NotFoundError('No users found to delete');
+      throw new NotFoundError('No users to delete');  // Changed from 'No users found to delete'
     }
     return result;
   }

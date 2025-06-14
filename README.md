@@ -1,35 +1,82 @@
-# User Management API
+# Backend Skill Test - User Management API
 
-A RESTful API for managing user data with MongoDB.
+A RESTful API service for managing user data with comprehensive CRUD operations, data validation, and error handling.
 
-## Live API URL
+## Live Demo
 
-https://user-management-hjhedkkmu-reannn22s-projects.vercel.app/
+- Production URL: https://user-management-4eilpf8w1-reannn22s-projects.vercel.app/api/users
 
-## Setup and Installation
+## Technology Stack
 
-1. Clone the repository
+- **Runtime**: Node.js
+- **Framework**: Express.js
+- **Database**: MongoDB
+- **ODM**: Mongoose
+- **Validation**: Express Validator
+- **Deployment**: Vercel
+- **Containerization**: Docker
+
+## Features
+
+- ✅ Complete CRUD operations for user management
+- 🔒 Input validation and error handling
+- 📝 Extensive user data model
+- 🚀 Docker support
+- 📚 API documentation (Postman Collection)
+
+## Required Endpoints
+
+| Method | Endpoint               | Description      |
+| ------ | ---------------------- | ---------------- |
+| POST   | /api/users             | Create new user  |
+| GET    | /api/users             | Get all users    |
+| GET    | /api/users/:employeeId | Get user by ID   |
+| PUT    | /api/users/:employeeId | Update user      |
+| DELETE | /api/users/:employeeId | Delete user      |
+| DELETE | /api/users             | Delete all users |
+
+## Data Model
+
+Required fields:
+
+- Name (string)
+- Email (string, unique)
+- Phone number (string)
+- Active status (boolean)
+- Department (string)
+
+## Getting Started
+
+### Prerequisites
+
+- Node.js >= 18
+- MongoDB
+- Docker (optional)
+
+### Installation
+
+1. Clone repository:
 
 ```bash
 git clone https://github.com/Reannn22/reannn22skilltest.git
 cd backendskilltest
 ```
 
-2. Install dependencies
+2. Install dependencies:
 
 ```bash
 npm install
 ```
 
-3. Configure environment variables
-   Create a `.env` file in the root directory:
+3. Configure environment:
 
-```env
-MONGODB_URI=your_mongodb_connection_string
-PORT=3000
+```bash
+# Create .env file
+MONGODB_URI=your_mongodb_uri
+PORT=3001
 ```
 
-4. Run the application
+4. Run application:
 
 ```bash
 # Development
@@ -39,155 +86,46 @@ npm run dev
 npm start
 ```
 
+### Docker Setup
+
+```bash
+# Build image
+docker build -t user-management-api .
+
+# Run container
+docker run -p 3001:3001 \
+  -e MONGODB_URI="your_mongodb_uri" \
+  user-management-api
+```
+
 ## API Documentation
 
-### Base URL
+### Create User (POST /api/users)
 
-```
-http://localhost:3000/api/users
-```
+Create new user with complete profile information.
 
-### Endpoints
-
-#### 1. Create User
-
-- **Method:** POST
-- **Endpoint:** `/`
-- **Body:**
+Request:
 
 ```json
 {
   "name": {
-    "first": "John",
-    "last": "Doe"
+    "first": "Ahmad",
+    "last": "Firdaus"
   },
-  "email": "john.doe@example.com",
+  "email": "ahmad.firdaus@company.co.id",
   "phoneNumber": {
-    "primary": "1234567890",
-    "secondary": "0987654321"
+    "primary": "081234567890",
+    "secondary": "087711223344"
   },
   "department": "IT",
-  "position": "Developer",
-  "employeeId": "EMP001",
+  "position": "Backend Developer",
+  "employeeId": "EMP011",
   "isActive": true,
-  "joiningDate": "2024-01-15",
-  "address": {
-    "street": "123 Main St",
-    "city": "City",
-    "state": "State",
-    "country": "Country",
-    "zipCode": "12345"
-  },
-  "emergencyContact": {
-    "name": "Jane Doe",
-    "relationship": "Spouse",
-    "phoneNumber": "1234567890"
-  },
-  "skills": ["JavaScript", "Node.js"],
-  "education": [
-    {
-      "degree": "Bachelor",
-      "institution": "University",
-      "year": 2020
-    }
-  ],
-  "socialMedia": {
-    "linkedin": "linkedin.com/johndoe",
-    "twitter": "@johndoe",
-    "github": "github.com/johndoe"
-  },
-  "notes": "Some notes"
+  "joiningDate": "2024-03-25"
 }
 ```
 
-#### 2. Get All Users
-
-- **Method:** GET
-- **Endpoint:** `/`
-
-#### 3. Get User by ID
-
-- **Method:** GET
-- **Endpoint:** `/:employeeId`
-
-#### 4. Update User
-
-- **Method:** PUT
-- **Endpoint:** `/:employeeId`
-- **Body:** Same as Create User
-
-#### 5. Delete User
-
-- **Method:** DELETE
-- **Endpoint:** `/:employeeId`
-
-#### 6. Delete All Users
-
-- **Method:** DELETE
-- **Endpoint:** `/`
-
-### Validation Rules
-
-- First name and last name are required
-- Email must be valid and unique
-- Primary phone number must be at least 10 digits
-- Department must be one of: Engineering, Marketing, Sales, HR, Finance, Operations, IT, Customer Support
-- Position is required
-- EmployeeId is required and must be unique
-
-## API Documentation with Examples
-
-Note: Replace `http://localhost:3000` with `https://user-management-hjhedkkmu-reannn22s-projects.vercel.app` for production API.
-
-### 1. Create User (POST /api/users)
-
-```bash
-curl -X POST \
-  http://localhost:3000/api/users \
-  -H "Content-Type: application/json" \
-  -d '{
-    "name": {
-      "first": "Ahmad",
-      "last": "Firdaus"
-    },
-    "email": "ahmad.firdaus@company.co.id",
-    "phoneNumber": {
-      "primary": "081234567890",
-      "secondary": "087711223344"
-    },
-    "department": "IT",
-    "position": "Developer",
-    "employeeId": "EMP001",
-    "isActive": true,
-    "joiningDate": "2024-01-15",
-    "address": {
-      "street": "123 Main St",
-      "city": "City",
-      "state": "State",
-      "country": "Country",
-      "zipCode": "12345"
-    },
-    "emergencyContact": {
-      "name": "Jane Doe",
-      "relationship": "Spouse",
-      "phoneNumber": "1234567890"
-    },
-    "skills": ["JavaScript", "Node.js"],
-    "education": [{
-      "degree": "Bachelor",
-      "institution": "University",
-      "year": 2020
-    }],
-    "socialMedia": {
-      "linkedin": "linkedin.com/johndoe",
-      "twitter": "@johndoe",
-      "github": "github.com/johndoe"
-    },
-    "notes": "Some notes"
-  }'
-```
-
-Success Response:
+Response (201 Created):
 
 ```json
 {
@@ -199,55 +137,18 @@ Success Response:
         "first": "Ahmad",
         "last": "Firdaus",
         "fullName": "Ahmad Firdaus"
-      },
-      "email": "ahmad.firdaus@company.co.id",
-      "phoneNumber": {
-        "primary": "081234567890",
-        "secondary": "087711223344"
-      },
-      "department": "IT",
-      "position": "Developer",
-      "employeeId": "EMP001",
-      "isActive": true,
-      "joiningDate": "2024-01-15",
-      "address": {
-        "street": "123 Main St",
-        "city": "City",
-        "state": "State",
-        "country": "Country",
-        "zipCode": "12345"
-      },
-      "emergencyContact": {
-        "name": "Jane Doe",
-        "relationship": "Spouse",
-        "phoneNumber": "1234567890"
-      },
-      "skills": ["JavaScript", "Node.js"],
-      "education": [
-        {
-          "degree": "Bachelor",
-          "institution": "University",
-          "year": 2020
-        }
-      ],
-      "socialMedia": {
-        "linkedin": "linkedin.com/johndoe",
-        "twitter": "@johndoe",
-        "github": "github.com/johndoe"
-      },
-      "notes": "Some notes"
+      }
+      // ...full user details
     }
   }
 }
 ```
 
-### 2. Get User by ID (GET /api/users/:employeeId)
+### Get User (GET /api/users/:employeeId)
 
-```bash
-curl -X GET http://localhost:3000/api/users/EMP011
-```
+Retrieve specific user by employee ID.
 
-Success Response:
+Response (200 OK):
 
 ```json
 {
@@ -255,163 +156,17 @@ Success Response:
   "message": "User retrieved successfully",
   "data": {
     "user": {
-      "name": {
-        "first": "Ahmad",
-        "last": "Firdaus",
-        "fullName": "Ahmad Firdaus"
-      },
-      "email": "ahmad.firdaus@company.co.id",
-      "phoneNumber": {
-        "primary": "081234567890",
-        "secondary": "087711223344"
-      },
-      "department": "IT",
-      "position": "Developer",
-      "employeeId": "EMP001",
-      "isActive": true,
-      "joiningDate": "2024-01-15",
-      "address": {
-        "street": "123 Main St",
-        "city": "City",
-        "state": "State",
-        "country": "Country",
-        "zipCode": "12345"
-      },
-      "emergencyContact": {
-        "name": "Jane Doe",
-        "relationship": "Spouse",
-        "phoneNumber": "1234567890"
-      },
-      "skills": ["JavaScript", "Node.js"],
-      "education": [
-        {
-          "degree": "Bachelor",
-          "institution": "University",
-          "year": 2020
-        }
-      ],
-      "socialMedia": {
-        "linkedin": "linkedin.com/johndoe",
-        "twitter": "@johndoe",
-        "github": "github.com/johndoe"
-      },
-      "notes": "Some notes"
+      // user details
     }
   }
 }
 ```
 
-### 3. Get All Users (GET /api/users)
+### Update User (PUT /api/users/:employeeId)
 
-```bash
-curl -X GET http://localhost:3000/api/users/
-```
+Update existing user information.
 
-Success Response:
-
-```json
-{
-  "status": "success",
-  "message": "Users retrieved successfully",
-  "data": {
-    "users": [
-      {
-        "name": {
-          "first": "Ahmad",
-          "last": "Firdaus",
-          "fullName": "Ahmad Firdaus"
-        },
-        "email": "ahmad.firdaus@company.co.id",
-        "phoneNumber": {
-          "primary": "081234567890",
-          "secondary": "087711223344"
-        },
-        "department": "IT",
-        "position": "Developer",
-        "employeeId": "EMP001",
-        "isActive": true,
-        "joiningDate": "2024-01-15",
-        "address": {
-          "street": "123 Main St",
-          "city": "City",
-          "state": "State",
-          "country": "Country",
-          "zipCode": "12345"
-        },
-        "emergencyContact": {
-          "name": "Jane Doe",
-          "relationship": "Spouse",
-          "phoneNumber": "1234567890"
-        },
-        "skills": ["JavaScript", "Node.js"],
-        "education": [
-          {
-            "degree": "Bachelor",
-            "institution": "University",
-            "year": 2020
-          }
-        ],
-        "socialMedia": {
-          "linkedin": "linkedin.com/johndoe",
-          "twitter": "@johndoe",
-          "github": "github.com/johndoe"
-        },
-        "notes": "Some notes"
-      }
-    ]
-  }
-}
-```
-
-### 4. Update User (PUT /api/users/:employeeId)
-
-```bash
-curl -X PUT \
-  http://localhost:3000/api/users/EMP011 \
-  -H "Content-Type: application/json" \
-  -d '{
-    "name": {
-      "first": "Ahmad",
-      "last": "Updated"
-    },
-    "email": "ahmad.updated@company.co.id",
-    "phoneNumber": {
-      "primary": "081234567891",
-      "secondary": "087711223345"
-    },
-    "department": "IT",
-    "position": "Senior Developer",
-    "employeeId": "EMP001",
-    "isActive": true,
-    "joiningDate": "2024-01-15",
-    "address": {
-      "street": "123 Main St",
-      "city": "City",
-      "state": "State",
-      "country": "Country",
-      "zipCode": "12345"
-    },
-    "emergencyContact": {
-      "name": "Jane Doe",
-      "relationship": "Spouse",
-      "phoneNumber": "1234567890"
-    },
-    "skills": ["JavaScript", "Node.js", "React"],
-    "education": [{
-      "degree": "Bachelor",
-      "institution": "University",
-      "year": 2020
-    }],
-    "socialMedia": {
-      "linkedin": "linkedin.com/johndoe",
-      "twitter": "@johndoe",
-      "github": "github.com/johndoe"
-    },
-    "notes": "Some updated notes"
-  }'
-```
-
-Success Response:
+Response (200 OK):
 
 ```json
 {
@@ -419,207 +174,155 @@ Success Response:
   "message": "User updated successfully",
   "data": {
     "user": {
-      "name": {
-        "first": "Ahmad",
-        "last": "Updated",
-        "fullName": "Ahmad Updated"
-      },
-      "email": "ahmad.updated@company.co.id",
-      "phoneNumber": {
-        "primary": "081234567891",
-        "secondary": "087711223345"
-      },
-      "department": "IT",
-      "position": "Senior Developer",
-      "employeeId": "EMP001",
-      "isActive": true,
-      "joiningDate": "2024-01-15",
-      "address": {
-        "street": "123 Main St",
-        "city": "City",
-        "state": "State",
-        "country": "Country",
-        "zipCode": "12345"
-      },
-      "emergencyContact": {
-        "name": "Jane Doe",
-        "relationship": "Spouse",
-        "phoneNumber": "1234567890"
-      },
-      "skills": ["JavaScript", "Node.js", "React"],
-      "education": [
-        {
-          "degree": "Bachelor",
-          "institution": "University",
-          "year": 2020
-        }
-      ],
-      "socialMedia": {
-        "linkedin": "linkedin.com/johndoe",
-        "twitter": "@johndoe",
-        "github": "github.com/johndoe"
-      },
-      "notes": "Some updated notes"
+      // updated user details
     }
   }
 }
 ```
 
-### 5. Delete User (DELETE /api/users/:employeeId)
+### Delete User (DELETE /api/users/:employeeId)
 
-```bash
-curl -X DELETE http://localhost:3000/api/users/EMP012
-```
+Remove specific user.
 
-Success Response:
+Response (200 OK):
 
 ```json
 {
   "status": "success",
-  "message": "User with ID EMP012 deleted successfully",
+  "message": "User with ID EMP011 deleted successfully",
   "data": {
     "deletedCount": 1
   }
 }
 ```
 
-Error Response:
+## Input Validation
 
-```json
-{
-  "status": "error",
-  "message": "User with ID EMP011 not found"
-}
-```
-
-### 6. Delete All Users (DELETE /api/users)
-
-```bash
-curl -X DELETE http://localhost:3000/api/users
-```
-
-Success Response:
-
-```json
-{
-  "status": "success",
-  "message": "All users deleted successfully",
-  "data": {
-    "deletedCount": 2
-  }
-}
-```
-
-## Response Format
-
-All API endpoints return responses in a consistent format:
-
-```json
-{
-  "status": "success|error",
-  "message": "Description of what happened",
-  "data": {
-    // Response data or error details
-  }
-}
-```
+- Email: Valid format required
+- Phone number: Minimum 10 digits, numbers only
+- Required fields validation
+- Department values validation
 
 ## Error Handling
 
-The API handles various error scenarios:
+All errors return appropriate HTTP status codes:
 
-- 404: Resource not found
 - 400: Validation errors
+- 404: Resource not found
 - 500: Server errors
 
-## Error Responses Examples
+Error response format:
 
-#### Get User by ID (404 Not Found)
-```bash
-curl -X GET http://localhost:3000/api/users/NONEXISTENT
-```
-
-Response:
 ```json
 {
   "status": "error",
-  "message": "User with ID NONEXISTENT not found"
+  "message": "Error description",
+  "errors": [
+    {
+      "field": "fieldName",
+      "message": "Validation message"
+    }
+  ]
 }
 ```
 
-#### Update User (404 Not Found)
+## Testing
+
+The project uses Jest and Supertest for API testing.
+
 ```bash
-curl -X PUT \
-  http://localhost:3000/api/users/NONEXISTENT \
-  -H "Content-Type: application/json" \
-  -d '{...}'
+# Run all tests
+npm test
+
+# Run tests with coverage
+npm run test:coverage
+
+# Run tests in watch mode
+npm run test:watch
 ```
 
-Response:
-```json
-{
-  "status": "error",
-  "message": "User with ID NONEXISTENT not found"
-}
-```
+### Test Cases
 
-#### Delete User (404 Not Found)
+1. User Creation
+
 ```bash
-curl -X DELETE http://localhost:3000/api/users/NONEXISTENT
+✓ should create a new user
+✓ should fail if required fields are missing
 ```
 
-Response:
-```json
-{
-  "status": "error",
-  "message": "User with ID NONEXISTENT not found"
-}
-```
+2. User Retrieval
 
-#### Get All Users (Empty Database)
 ```bash
-curl -X GET http://localhost:3000/api/users
+✓ should retrieve all users
+✓ should return 404 if no users found
+✓ should retrieve user by employeeId
+✓ should return 404 if user not found
 ```
 
-Response:
-```json
-{
-  "status": "error",
-  "message": "No users found"
-}
+3. User Updates
+
+```bash
+✓ should update existing user
+✓ should return 404 if user not found
 ```
 
-## Docker Support
+4. User Deletion
 
-Build and run with Docker:
+```bash
+✓ should delete existing user
+✓ should return 404 if user not found
+✓ should delete all users
+✓ should return error when no users to delete
+```
 
-````bash
-# Build image
-docker build -t user-management-api .
+## Codebase Structure
 
-# Run container```
-docker run -p 4000:4000 -e MONGODB_URI=your_mongodb_uri user-management-api
-oyment
+```
+backendskilltest/
+├── src/
+│   ├── controllers/
+│   │   └── userController.js     # Request handlers
+│   ├── models/
+│   │   └── user.js              # MongoDB schema
+│   ├── routes/
+│   │   └── userRoutes.js        # API routes
+│   ├── middleware/
+│   │   └── errorHandler.js      # Error handling
+│   ├── utils/
+│   │   └── formatUser.js        # Response formatting
+│   ├── app.js                   # Express app setup
+│   └── index.js                 # Server entry point
+├── tests/
+│   └── user.test.js            # API tests
+├── .env                        # Environment variables
+├── .gitignore                 # Git ignore rules
+├── Dockerfile                 # Docker configuration
+├── docker-compose.yml        # Docker compose config
+├── package.json             # Project dependencies
+└── README.md               # Documentation
+```
+
+### Key Components
+
+- **controllers/**: Business logic and request handling
+- **models/**: Database schemas and models
+- **routes/**: API endpoint definitions
+- **middleware/**: Custom middleware functions
+- **utils/**: Helper functions and utilities
+- **tests/**: Test suites and test helpers
+
+## Deployment
+
 Deploy to Vercel:
+
 ```bash
-# Install Vercel CLI```bash
-npm install -g vercell Vercel CLI
-g vercel
+# Install Vercel CLI
+npm i -g vercel
+
 # Deploy
-vercel --prod# Deploy
-````
-
+vercel --prod
 ```
-## Technologies Used
-ies Used
-- Node.js
-- Express.js
-- MongoDB
-- MongooseB
-- Express Validatorse
-- Docker- Express Validator
 
+## Author
 
-- Vercel- Docker
-- Vercel
-```
+[Reyhan](https://github.com/Reannn22)

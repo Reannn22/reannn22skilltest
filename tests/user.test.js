@@ -192,6 +192,29 @@ describe('User API Tests', () => {
     });
   });
 
+  describe('DELETE /api/users', () => {
+    it('should delete all users', async () => {
+
+      await User.create([validUser, testUser]);
+
+      const res = await request(app)
+        .delete('/api/users');
+
+      expect(res.status).toBe(200);
+      expect(res.body.status).toBe('success');
+      expect(res.body.data.deletedCount).toBe(2); // karena kita tambahkan 2 user
+    });
+
+    it('should return 404 if no users to delete', async () => {
+      const res = await request(app)
+        .delete('/api/users');
+
+      expect(res.status).toBe(404);
+      expect(res.body.status).toBe('error');
+      expect(res.body.message).toBe('No users to delete'); // sesuaikan dengan message di controllermu
+    });
+  });
+
   describe('DELETE /api/users/:employeeId', () => {
     it('should delete existing user', async () => {
         await User.create(validUser); 

@@ -14,15 +14,6 @@ app.use(express.json());
 // Routes
 app.use('/api/users', userRoutes);
 
-// Catch-all for unmatched routes
-app.use((req, res, next) => {
-  res.status(404).json({
-    message: 'Endpoint not found',
-    path: req.originalUrl,
-    method: req.method
-  });
-});
-
 // Error handler - must be last middleware
 app.use(errorHandler);
 
@@ -63,6 +54,16 @@ process.on('unhandledRejection', (error) => {
 app.get('/', (req, res) => {
   res.send('Server running & connected to MongoDB 🚀');
 });
+
+// Catch-all for unmatched routes
+app.use((req, res, next) => {
+  res.status(404).json({
+    message: 'Endpoint not found',
+    path: req.originalUrl,
+    method: req.method
+  });
+});
+
 
 
 
