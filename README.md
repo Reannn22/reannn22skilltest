@@ -100,6 +100,11 @@ docker run -p 3001:3001 \
 
 ## API Documentation
 
+### Postman Collection
+
+You can find the complete API documentation and test the endpoints using our Postman collection:
+[View Postman Collection](https://www.postman.co/workspace/SkillTest~d28c032f-8d32-40d9-b0d7-6092d3dcc93a/collection/37563138-e4afcd61-fbfd-4a11-8bc1-6c2c4c119c99?action=share&creator=37563138&active-environment=37563138-8af18842-f5dd-4699-9712-57cebde6e1d0)
+
 ### Create User (POST /api/users)
 
 Create new user with complete profile information.
