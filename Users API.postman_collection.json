@@ -1,0 +1,521 @@
+{
+	"info": {
+		"_postman_id": "e4afcd61-fbfd-4a11-8bc1-6c2c4c119c99",
+		"name": "Users API",
+		"description": "API User Management ini adalah layanan RESTful sederhana yang menyediakan endpoint untuk mengelola data pengguna, termasuk operasi Create, Read, Update, dan Delete (CRUD). Setiap pengguna memiliki atribut nama, email unik, nomor telepon, status aktif, dan departemen. API ini dilengkapi dengan validasi input seperti format email yang valid dan minimal 10 digit angka untuk nomor telepon. Seluruh response error ditangani dengan pesan yang informatif. Dokumentasi API disediakan dalam bentuk Postman Collection, dan aplikasi telah dideploy ke Vercel dan dapat diakses melalui URL produksi: [https://user-management-8t4dze4j4-reannn22s-projects.vercel.app/](https://user-management-8t4dze4j4-reannn22s-projects.vercel.app/).",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "37563138"
+	},
+	"item": [
+		{
+			"name": "Create User",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": {\r\n        \"first\": \"Ahmad\",\r\n        \"last\": \"Firdaus\"\r\n    },\r\n    \"email\": \"ahmad.firdaus@company.co.id\",\r\n    \"phoneNumber\": {\r\n        \"primary\": \"081234567890\",\r\n        \"secondary\": \"087711223344\"\r\n    },\r\n    \"department\": \"IT\",\r\n    \"position\": \"Backend Developer\",\r\n    \"employeeId\": \"EMP011\",\r\n    \"isActive\": true,\r\n    \"joiningDate\": \"2024-03-25\",\r\n    \"address\": {\r\n        \"street\": \"Jalan Merdeka No. 15\",\r\n        \"city\": \"Jakarta Pusat\",\r\n        \"state\": \"DKI Jakarta\",\r\n        \"country\": \"Indonesia\",\r\n        \"zipCode\": \"10110\"\r\n    },\r\n    \"emergencyContact\": {\r\n        \"name\": \"Siti Nurhaliza\",\r\n        \"relationship\": \"Istri\",\r\n        \"phoneNumber\": \"085566778899\"\r\n    },\r\n    \"skills\": [\"Java\", \"Spring Boot\", \"PostgreSQL\", \"Docker\"],\r\n    \"education\": [\r\n        {\r\n            \"degree\": \"Sarjana Teknik Informatika\",\r\n            \"institution\": \"Institut Teknologi Bandung\",\r\n            \"year\": 2020\r\n        }\r\n    ],\r\n    \"socialMedia\": {\r\n        \"linkedin\": \"linkedin.com/in/ahmadfirdaus\",\r\n        \"twitter\": \"@ahmadfirdaus\",\r\n        \"github\": \"github.com/ahmadfirdaus\"\r\n    },\r\n    \"notes\": \"Backend developer dengan spesialisasi Java dan Spring Boot.\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "{{base_url}}/api/users",
+				"description": "Endpoint ini digunakan untuk menambahkan data pengguna baru ke sistem manajemen user. Data yang dikirim harus sesuai dengan struktur yang ditentukan dan divalidasi sebelum disimpan ke database."
+			},
+			"response": [
+				{
+					"name": "Create User",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": {\r\n        \"first\": \"Ahmad\",\r\n        \"last\": \"Firdaus\"\r\n    },\r\n    \"email\": \"ahmad.firdaus@company.co.id\",\r\n    \"phoneNumber\": {\r\n        \"primary\": \"081234567890\",\r\n        \"secondary\": \"087711223344\"\r\n    },\r\n    \"department\": \"IT\",\r\n    \"position\": \"Backend Developer\",\r\n    \"employeeId\": \"EMP011\",\r\n    \"isActive\": true,\r\n    \"joiningDate\": \"2024-03-25\",\r\n    \"address\": {\r\n        \"street\": \"Jalan Merdeka No. 15\",\r\n        \"city\": \"Jakarta Pusat\",\r\n        \"state\": \"DKI Jakarta\",\r\n        \"country\": \"Indonesia\",\r\n        \"zipCode\": \"10110\"\r\n    },\r\n    \"emergencyContact\": {\r\n        \"name\": \"Siti Nurhaliza\",\r\n        \"relationship\": \"Istri\",\r\n        \"phoneNumber\": \"085566778899\"\r\n    },\r\n    \"skills\": [\"Java\", \"Spring Boot\", \"PostgreSQL\", \"Docker\"],\r\n    \"education\": [\r\n        {\r\n            \"degree\": \"Sarjana Teknik Informatika\",\r\n            \"institution\": \"Institut Teknologi Bandung\",\r\n            \"year\": 2020\r\n        }\r\n    ],\r\n    \"socialMedia\": {\r\n        \"linkedin\": \"linkedin.com/in/ahmadfirdaus\",\r\n        \"twitter\": \"@ahmadfirdaus\",\r\n        \"github\": \"github.com/ahmadfirdaus\"\r\n    },\r\n    \"notes\": \"Backend developer dengan spesialisasi Java dan Spring Boot.\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{base_url}}/api/users"
+					},
+					"status": "Created",
+					"code": 201,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "1489"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"5d1-MqDJPZM3BHIO9Roo/H+2uIN4lC4\""
+						},
+						{
+							"key": "Date",
+							"value": "Sat, 14 Jun 2025 13:10:30 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"status\": \"success\",\n    \"message\": \"User created successfully\",\n    \"data\": {\n        \"user\": {\n            \"name\": {\n                \"first\": \"Ahmad\",\n                \"last\": \"Firdaus\",\n                \"fullName\": \"Ahmad Firdaus\"\n            },\n            \"email\": \"ahmad.firdaus@company.co.id\",\n            \"phoneNumber\": {\n                \"primary\": \"081234567890\",\n                \"secondary\": \"087711223344\"\n            },\n            \"department\": \"IT\",\n            \"position\": \"Backend Developer\",\n            \"employeeId\": \"EMP011\",\n            \"isActive\": true,\n            \"joiningDate\": \"2024-03-25T00:00:00.000Z\",\n            \"address\": {\n                \"street\": \"Jalan Merdeka No. 15\",\n                \"city\": \"Jakarta Pusat\",\n                \"state\": \"DKI Jakarta\",\n                \"country\": \"Indonesia\",\n                \"zipCode\": \"10110\"\n            },\n            \"emergencyContact\": {\n                \"name\": \"Siti Nurhaliza\",\n                \"relationship\": \"Istri\",\n                \"phoneNumber\": \"085566778899\"\n            },\n            \"skills\": [\n                \"Java\",\n                \"Spring Boot\",\n                \"PostgreSQL\",\n                \"Docker\"\n            ],\n            \"education\": [\n                {\n                    \"degree\": \"Sarjana Teknik Informatika\",\n                    \"institution\": \"Institut Teknologi Bandung\",\n                    \"year\": 2020\n                }\n            ],\n            \"socialMedia\": {\n                \"linkedin\": \"linkedin.com/in/ahmadfirdaus\",\n                \"twitter\": \"@ahmadfirdaus\",\n                \"github\": \"github.com/ahmadfirdaus\"\n            },\n            \"notes\": \"Backend developer dengan spesialisasi Java dan Spring Boot.\",\n            \"createdAt\": \"2025-06-14T13:10:30.041Z\",\n            \"updatedAt\": \"2025-06-14T13:10:30.041Z\"\n        }\n    }\n}"
+				}
+			]
+		},
+		{
+			"name": "Get User by ID",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "{{base_url}}/api/users/EMP011",
+				"description": "Mengambil data user berdasarkan `employeeId`. Data yang dikembalikan mencakup seluruh informasi user termasuk metadata (`createdAt`, `updatedAt`)."
+			},
+			"response": [
+				{
+					"name": "Get User by ID",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{base_url}}/api/users/EMP011"
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "1491"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"5d3-yAO8YgqYaRBSEJbPYhuGyKTGl48\""
+						},
+						{
+							"key": "Date",
+							"value": "Sat, 14 Jun 2025 13:10:45 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"status\": \"success\",\n    \"message\": \"User retrieved successfully\",\n    \"data\": {\n        \"user\": {\n            \"name\": {\n                \"first\": \"Ahmad\",\n                \"last\": \"Firdaus\",\n                \"fullName\": \"Ahmad Firdaus\"\n            },\n            \"email\": \"ahmad.firdaus@company.co.id\",\n            \"phoneNumber\": {\n                \"primary\": \"081234567890\",\n                \"secondary\": \"087711223344\"\n            },\n            \"department\": \"IT\",\n            \"position\": \"Backend Developer\",\n            \"employeeId\": \"EMP011\",\n            \"isActive\": true,\n            \"joiningDate\": \"2024-03-25T00:00:00.000Z\",\n            \"address\": {\n                \"street\": \"Jalan Merdeka No. 15\",\n                \"city\": \"Jakarta Pusat\",\n                \"state\": \"DKI Jakarta\",\n                \"country\": \"Indonesia\",\n                \"zipCode\": \"10110\"\n            },\n            \"emergencyContact\": {\n                \"name\": \"Siti Nurhaliza\",\n                \"relationship\": \"Istri\",\n                \"phoneNumber\": \"085566778899\"\n            },\n            \"skills\": [\n                \"Java\",\n                \"Spring Boot\",\n                \"PostgreSQL\",\n                \"Docker\"\n            ],\n            \"education\": [\n                {\n                    \"degree\": \"Sarjana Teknik Informatika\",\n                    \"institution\": \"Institut Teknologi Bandung\",\n                    \"year\": 2020\n                }\n            ],\n            \"socialMedia\": {\n                \"linkedin\": \"linkedin.com/in/ahmadfirdaus\",\n                \"twitter\": \"@ahmadfirdaus\",\n                \"github\": \"github.com/ahmadfirdaus\"\n            },\n            \"notes\": \"Backend developer dengan spesialisasi Java dan Spring Boot.\",\n            \"createdAt\": \"2025-06-14T13:10:30.041Z\",\n            \"updatedAt\": \"2025-06-14T13:10:30.041Z\"\n        }\n    }\n}"
+				}
+			]
+		},
+		{
+			"name": "Get All User",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "{{base_url}}/api/users/EMP011",
+				"description": "Mengambil seluruh data user yang tersimpan dalam sistem. Cocok untuk tampilan daftar pengguna atau pencarian global."
+			},
+			"response": [
+				{
+					"name": "Get All User",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{base_url}}/api/users/EMP011"
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "1491"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"5d3-yAO8YgqYaRBSEJbPYhuGyKTGl48\""
+						},
+						{
+							"key": "Date",
+							"value": "Sat, 14 Jun 2025 13:11:05 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"status\": \"success\",\n    \"message\": \"User retrieved successfully\",\n    \"data\": {\n        \"user\": {\n            \"name\": {\n                \"first\": \"Ahmad\",\n                \"last\": \"Firdaus\",\n                \"fullName\": \"Ahmad Firdaus\"\n            },\n            \"email\": \"ahmad.firdaus@company.co.id\",\n            \"phoneNumber\": {\n                \"primary\": \"081234567890\",\n                \"secondary\": \"087711223344\"\n            },\n            \"department\": \"IT\",\n            \"position\": \"Backend Developer\",\n            \"employeeId\": \"EMP011\",\n            \"isActive\": true,\n            \"joiningDate\": \"2024-03-25T00:00:00.000Z\",\n            \"address\": {\n                \"street\": \"Jalan Merdeka No. 15\",\n                \"city\": \"Jakarta Pusat\",\n                \"state\": \"DKI Jakarta\",\n                \"country\": \"Indonesia\",\n                \"zipCode\": \"10110\"\n            },\n            \"emergencyContact\": {\n                \"name\": \"Siti Nurhaliza\",\n                \"relationship\": \"Istri\",\n                \"phoneNumber\": \"085566778899\"\n            },\n            \"skills\": [\n                \"Java\",\n                \"Spring Boot\",\n                \"PostgreSQL\",\n                \"Docker\"\n            ],\n            \"education\": [\n                {\n                    \"degree\": \"Sarjana Teknik Informatika\",\n                    \"institution\": \"Institut Teknologi Bandung\",\n                    \"year\": 2020\n                }\n            ],\n            \"socialMedia\": {\n                \"linkedin\": \"linkedin.com/in/ahmadfirdaus\",\n                \"twitter\": \"@ahmadfirdaus\",\n                \"github\": \"github.com/ahmadfirdaus\"\n            },\n            \"notes\": \"Backend developer dengan spesialisasi Java dan Spring Boot.\",\n            \"createdAt\": \"2025-06-14T13:10:30.041Z\",\n            \"updatedAt\": \"2025-06-14T13:10:30.041Z\"\n        }\n    }\n}"
+				}
+			]
+		},
+		{
+			"name": "Update User by ID",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": {\r\n      \"first\": \"Ahmad\",\r\n      \"last\": \"Firdaus\"\r\n    },\r\n    \"email\": \"ahmad.firdaus@company.co.id\",\r\n    \"phoneNumber\": {\r\n      \"primary\": \"081234567890\",\r\n      \"secondary\": \"087711223344\"\r\n    },\r\n    \"department\": \"IT\",\r\n    \"position\": \"Senior Backend Developer\",\r\n    \"employeeId\": \"EMP011\",\r\n    \"isActive\": true,\r\n    \"joiningDate\": \"2024-03-25\",\r\n    \"address\": {\r\n      \"street\": \"Jalan Merdeka No. 15\",\r\n      \"city\": \"Jakarta Pusat\",\r\n      \"state\": \"DKI Jakarta\",\r\n      \"country\": \"Indonesia\",\r\n      \"zipCode\": \"10110\"\r\n    },\r\n    \"emergencyContact\": {\r\n      \"name\": \"Siti Nurhaliza\",\r\n      \"relationship\": \"Istri\",\r\n      \"phoneNumber\": \"085566778899\"\r\n    },\r\n    \"skills\": [\"Java\", \"Spring Boot\", \"PostgreSQL\", \"Docker\", \"Kubernetes\", \"AWS\"],\r\n    \"education\": [{\r\n      \"degree\": \"Sarjana Teknik Informatika\",\r\n      \"institution\": \"Institut Teknologi Bandung\",\r\n      \"year\": 2020\r\n    }],\r\n    \"socialMedia\": {\r\n      \"linkedin\": \"linkedin.com/in/ahmadfirdaus\",\r\n      \"twitter\": \"@ahmadfirdaus\",\r\n      \"github\": \"github.com/ahmadfirdaus\"\r\n    },\r\n    \"notes\": \"Senior backend developer dengan tambahan keahlian cloud dan container orchestration.\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "{{base_url}}/api/users/EMP011",
+				"description": "Memperbarui data user berdasarkan employeeId. Semua field dalam request body akan menggantikan data sebelumnya, termasuk perubahan posisi, keahlian, dan catatan lainnya."
+			},
+			"response": [
+				{
+					"name": "Update User by ID",
+					"originalRequest": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": {\r\n      \"first\": \"Ahmad\",\r\n      \"last\": \"Firdaus\"\r\n    },\r\n    \"email\": \"ahmad.firdaus@company.co.id\",\r\n    \"phoneNumber\": {\r\n      \"primary\": \"081234567890\",\r\n      \"secondary\": \"087711223344\"\r\n    },\r\n    \"department\": \"IT\",\r\n    \"position\": \"Senior Backend Developer\",\r\n    \"employeeId\": \"EMP011\",\r\n    \"isActive\": true,\r\n    \"joiningDate\": \"2024-03-25\",\r\n    \"address\": {\r\n      \"street\": \"Jalan Merdeka No. 15\",\r\n      \"city\": \"Jakarta Pusat\",\r\n      \"state\": \"DKI Jakarta\",\r\n      \"country\": \"Indonesia\",\r\n      \"zipCode\": \"10110\"\r\n    },\r\n    \"emergencyContact\": {\r\n      \"name\": \"Siti Nurhaliza\",\r\n      \"relationship\": \"Istri\",\r\n      \"phoneNumber\": \"085566778899\"\r\n    },\r\n    \"skills\": [\"Java\", \"Spring Boot\", \"PostgreSQL\", \"Docker\", \"Kubernetes\", \"AWS\"],\r\n    \"education\": [{\r\n      \"degree\": \"Sarjana Teknik Informatika\",\r\n      \"institution\": \"Institut Teknologi Bandung\",\r\n      \"year\": 2020\r\n    }],\r\n    \"socialMedia\": {\r\n      \"linkedin\": \"linkedin.com/in/ahmadfirdaus\",\r\n      \"twitter\": \"@ahmadfirdaus\",\r\n      \"github\": \"github.com/ahmadfirdaus\"\r\n    },\r\n    \"notes\": \"Senior backend developer dengan tambahan keahlian cloud dan container orchestration.\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{base_url}}/api/users/EMP011"
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "1558"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"616-ObiYFKyLLIQO8HBWcm1FJNcupW4\""
+						},
+						{
+							"key": "Date",
+							"value": "Sat, 14 Jun 2025 13:11:17 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"status\": \"success\",\n    \"message\": \"User updated successfully\",\n    \"data\": {\n        \"user\": {\n            \"name\": {\n                \"first\": \"Ahmad\",\n                \"last\": \"Firdaus\",\n                \"fullName\": \"Ahmad Firdaus\"\n            },\n            \"email\": \"ahmad.firdaus@company.co.id\",\n            \"phoneNumber\": {\n                \"primary\": \"081234567890\",\n                \"secondary\": \"087711223344\"\n            },\n            \"department\": \"IT\",\n            \"position\": \"Senior Backend Developer\",\n            \"employeeId\": \"EMP011\",\n            \"isActive\": true,\n            \"joiningDate\": \"2024-03-25T00:00:00.000Z\",\n            \"address\": {\n                \"street\": \"Jalan Merdeka No. 15\",\n                \"city\": \"Jakarta Pusat\",\n                \"state\": \"DKI Jakarta\",\n                \"country\": \"Indonesia\",\n                \"zipCode\": \"10110\"\n            },\n            \"emergencyContact\": {\n                \"name\": \"Siti Nurhaliza\",\n                \"relationship\": \"Istri\",\n                \"phoneNumber\": \"085566778899\"\n            },\n            \"skills\": [\n                \"Java\",\n                \"Spring Boot\",\n                \"PostgreSQL\",\n                \"Docker\",\n                \"Kubernetes\",\n                \"AWS\"\n            ],\n            \"education\": [\n                {\n                    \"degree\": \"Sarjana Teknik Informatika\",\n                    \"institution\": \"Institut Teknologi Bandung\",\n                    \"year\": 2020\n                }\n            ],\n            \"socialMedia\": {\n                \"linkedin\": \"linkedin.com/in/ahmadfirdaus\",\n                \"twitter\": \"@ahmadfirdaus\",\n                \"github\": \"github.com/ahmadfirdaus\"\n            },\n            \"notes\": \"Senior backend developer dengan tambahan keahlian cloud dan container orchestration.\",\n            \"createdAt\": \"2025-06-14T13:10:30.041Z\",\n            \"updatedAt\": \"2025-06-14T13:11:17.811Z\"\n        }\n    }\n}"
+				}
+			]
+		},
+		{
+			"name": "Delete User by ID",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": {\r\n      \"first\": \"Ahmad\",\r\n      \"last\": \"Firdaus\"\r\n    },\r\n    \"email\": \"ahmad.firdaus@company.co.id\",\r\n    \"phoneNumber\": {\r\n      \"primary\": \"081234567890\",\r\n      \"secondary\": \"087711223344\"\r\n    },\r\n    \"department\": \"IT\",\r\n    \"position\": \"Senior Backend Developer\",\r\n    \"employeeId\": \"EMP011\",\r\n    \"isActive\": true,\r\n    \"joiningDate\": \"2024-03-25\",\r\n    \"address\": {\r\n      \"street\": \"Jalan Merdeka No. 15\",\r\n      \"city\": \"Jakarta Pusat\",\r\n      \"state\": \"DKI Jakarta\",\r\n      \"country\": \"Indonesia\",\r\n      \"zipCode\": \"10110\"\r\n    },\r\n    \"emergencyContact\": {\r\n      \"name\": \"Siti Nurhaliza\",\r\n      \"relationship\": \"Istri\",\r\n      \"phoneNumber\": \"085566778899\"\r\n    },\r\n    \"skills\": [\"Java\", \"Spring Boot\", \"PostgreSQL\", \"Docker\", \"Kubernetes\", \"AWS\"],\r\n    \"education\": [{\r\n      \"degree\": \"Sarjana Teknik Informatika\",\r\n      \"institution\": \"Institut Teknologi Bandung\",\r\n      \"year\": 2020\r\n    }],\r\n    \"socialMedia\": {\r\n      \"linkedin\": \"linkedin.com/in/ahmadfirdaus\",\r\n      \"twitter\": \"@ahmadfirdaus\",\r\n      \"github\": \"github.com/ahmadfirdaus\"\r\n    },\r\n    \"notes\": \"Senior backend developer dengan tambahan keahlian cloud dan container orchestration.\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "{{base_url}}/api/users/EMP011",
+				"description": "Menghapus data user yang memiliki employeeId tertentu dari database."
+			},
+			"response": [
+				{
+					"name": "Delete User by ID",
+					"originalRequest": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": {\r\n      \"first\": \"Ahmad\",\r\n      \"last\": \"Firdaus\"\r\n    },\r\n    \"email\": \"ahmad.firdaus@company.co.id\",\r\n    \"phoneNumber\": {\r\n      \"primary\": \"081234567890\",\r\n      \"secondary\": \"087711223344\"\r\n    },\r\n    \"department\": \"IT\",\r\n    \"position\": \"Senior Backend Developer\",\r\n    \"employeeId\": \"EMP011\",\r\n    \"isActive\": true,\r\n    \"joiningDate\": \"2024-03-25\",\r\n    \"address\": {\r\n      \"street\": \"Jalan Merdeka No. 15\",\r\n      \"city\": \"Jakarta Pusat\",\r\n      \"state\": \"DKI Jakarta\",\r\n      \"country\": \"Indonesia\",\r\n      \"zipCode\": \"10110\"\r\n    },\r\n    \"emergencyContact\": {\r\n      \"name\": \"Siti Nurhaliza\",\r\n      \"relationship\": \"Istri\",\r\n      \"phoneNumber\": \"085566778899\"\r\n    },\r\n    \"skills\": [\"Java\", \"Spring Boot\", \"PostgreSQL\", \"Docker\", \"Kubernetes\", \"AWS\"],\r\n    \"education\": [{\r\n      \"degree\": \"Sarjana Teknik Informatika\",\r\n      \"institution\": \"Institut Teknologi Bandung\",\r\n      \"year\": 2020\r\n    }],\r\n    \"socialMedia\": {\r\n      \"linkedin\": \"linkedin.com/in/ahmadfirdaus\",\r\n      \"twitter\": \"@ahmadfirdaus\",\r\n      \"github\": \"github.com/ahmadfirdaus\"\r\n    },\r\n    \"notes\": \"Senior backend developer dengan tambahan keahlian cloud dan container orchestration.\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{base_url}}/api/users/EMP011"
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "121"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"79-bJsnQkQB/+rBsYEPW3dnlQTfx08\""
+						},
+						{
+							"key": "Date",
+							"value": "Sat, 14 Jun 2025 13:11:27 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"status\": \"success\",\n    \"message\": \"User with ID EMP011 deleted successfully\",\n    \"data\": {\n        \"deletedCount\": 1\n    }\n}"
+				}
+			]
+		},
+		{
+			"name": "Delete All User",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": {\r\n      \"first\": \"Ahmad\",\r\n      \"last\": \"Firdaus\"\r\n    },\r\n    \"email\": \"ahmad.firdaus@company.co.id\",\r\n    \"phoneNumber\": {\r\n      \"primary\": \"081234567890\",\r\n      \"secondary\": \"087711223344\"\r\n    },\r\n    \"department\": \"IT\",\r\n    \"position\": \"Senior Backend Developer\",\r\n    \"employeeId\": \"EMP011\",\r\n    \"isActive\": true,\r\n    \"joiningDate\": \"2024-03-25\",\r\n    \"address\": {\r\n      \"street\": \"Jalan Merdeka No. 15\",\r\n      \"city\": \"Jakarta Pusat\",\r\n      \"state\": \"DKI Jakarta\",\r\n      \"country\": \"Indonesia\",\r\n      \"zipCode\": \"10110\"\r\n    },\r\n    \"emergencyContact\": {\r\n      \"name\": \"Siti Nurhaliza\",\r\n      \"relationship\": \"Istri\",\r\n      \"phoneNumber\": \"085566778899\"\r\n    },\r\n    \"skills\": [\"Java\", \"Spring Boot\", \"PostgreSQL\", \"Docker\", \"Kubernetes\", \"AWS\"],\r\n    \"education\": [{\r\n      \"degree\": \"Sarjana Teknik Informatika\",\r\n      \"institution\": \"Institut Teknologi Bandung\",\r\n      \"year\": 2020\r\n    }],\r\n    \"socialMedia\": {\r\n      \"linkedin\": \"linkedin.com/in/ahmadfirdaus\",\r\n      \"twitter\": \"@ahmadfirdaus\",\r\n      \"github\": \"github.com/ahmadfirdaus\"\r\n    },\r\n    \"notes\": \"Senior backend developer dengan tambahan keahlian cloud dan container orchestration.\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "{{base_url}}/api/users/",
+				"description": "Menghapus seluruh data user dari database."
+			},
+			"response": [
+				{
+					"name": "Delete All User",
+					"originalRequest": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": {\r\n      \"first\": \"Ahmad\",\r\n      \"last\": \"Firdaus\"\r\n    },\r\n    \"email\": \"ahmad.firdaus@company.co.id\",\r\n    \"phoneNumber\": {\r\n      \"primary\": \"081234567890\",\r\n      \"secondary\": \"087711223344\"\r\n    },\r\n    \"department\": \"IT\",\r\n    \"position\": \"Senior Backend Developer\",\r\n    \"employeeId\": \"EMP011\",\r\n    \"isActive\": true,\r\n    \"joiningDate\": \"2024-03-25\",\r\n    \"address\": {\r\n      \"street\": \"Jalan Merdeka No. 15\",\r\n      \"city\": \"Jakarta Pusat\",\r\n      \"state\": \"DKI Jakarta\",\r\n      \"country\": \"Indonesia\",\r\n      \"zipCode\": \"10110\"\r\n    },\r\n    \"emergencyContact\": {\r\n      \"name\": \"Siti Nurhaliza\",\r\n      \"relationship\": \"Istri\",\r\n      \"phoneNumber\": \"085566778899\"\r\n    },\r\n    \"skills\": [\"Java\", \"Spring Boot\", \"PostgreSQL\", \"Docker\", \"Kubernetes\", \"AWS\"],\r\n    \"education\": [{\r\n      \"degree\": \"Sarjana Teknik Informatika\",\r\n      \"institution\": \"Institut Teknologi Bandung\",\r\n      \"year\": 2020\r\n    }],\r\n    \"socialMedia\": {\r\n      \"linkedin\": \"linkedin.com/in/ahmadfirdaus\",\r\n      \"twitter\": \"@ahmadfirdaus\",\r\n      \"github\": \"github.com/ahmadfirdaus\"\r\n    },\r\n    \"notes\": \"Senior backend developer dengan tambahan keahlian cloud dan container orchestration.\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{base_url}}/api/users/"
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "111"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"6f-UYzuhH3fVlJnNWkgFjak0ecqm6Y\""
+						},
+						{
+							"key": "Date",
+							"value": "Sat, 14 Jun 2025 13:10:10 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"status\": \"success\",\n    \"message\": \"All users deleted successfully\",\n    \"data\": {\n        \"deletedCount\": 2\n    }\n}"
+				}
+			]
+		}
+	]
+}
