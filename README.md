@@ -8,13 +8,14 @@ A RESTful API service for managing user data with comprehensive CRUD operations,
 
 ## Technology Stack
 
-- **Runtime**: Node.js
-- **Framework**: Express.js
-- **Database**: MongoDB
-- **ODM**: Mongoose
+- **Backend Framework**: Node.js (v18+) with Express.js
+- **Database**: MongoDB with Mongoose ODM
 - **Validation**: Express Validator
+- **Testing**: Jest & Supertest
+- **API Documentation**: Postman Collection
 - **Deployment**: Vercel
 - **Containerization**: Docker
+- **Version Control**: Git
 
 ## Features
 
@@ -285,26 +286,34 @@ npm run test:watch
 ```
 backendskilltest/
 ├── src/
-│   ├── controllers/
-│   │   └── userController.js     # Request handlers
-│   ├── models/
-│   │   └── user.js              # MongoDB schema
-│   ├── routes/
-│   │   └── userRoutes.js        # API routes
-│   ├── middleware/
-│   │   └── errorHandler.js      # Error handling
-│   ├── utils/
-│   │   └── formatUser.js        # Response formatting
-│   ├── app.js                   # Express app setup
-│   └── index.js                 # Server entry point
-├── tests/
-│   └── user.test.js            # API tests
-├── .env                        # Environment variables
-├── .gitignore                 # Git ignore rules
-├── Dockerfile                 # Docker configuration
-├── docker-compose.yml        # Docker compose config
-├── package.json             # Project dependencies
-└── README.md               # Documentation
+│   ├── controllers/          # Request handlers
+│   │   └── userController.js
+│   ├── models/              # Database schemas
+│   │   └── User.js
+│   ├── routes/              # API routes
+│   │   └── userRoutes.js
+│   ├── middleware/          # Custom middleware
+│   │   └── errorHandler.js
+│   ├── services/           # Business logic
+│   │   └── userService.js
+│   ├── utils/              # Helper functions
+│   │   └── formatUser.js
+│   ├── errors/             # Custom error classes
+│   │   └── NotFoundError.js
+│   ├── app.js             # Express app setup
+│   └── index.js           # Server entry point
+├── tests/                  # Test suites
+│   ├── user.test.js
+│   ├── model.test.js
+│   └── middleware.test.js
+├── .env                    # Environment variables
+├── .env.test              # Test environment variables
+├── .gitignore             # Git ignore rules
+├── Dockerfile             # Docker configuration
+├── docker-compose.yml     # Docker compose config
+├── jest.config.js         # Jest test configuration
+├── package.json           # Project dependencies
+└── README.md             # Documentation
 ```
 
 ### Key Components
