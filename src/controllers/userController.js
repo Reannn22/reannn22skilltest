@@ -1,39 +1,11 @@
-const User = require('../models/User');
+const userService = require('../services/userService');
+const formatUserResponse = require('../utils/formatUser');
+const NotFoundError = require('../errors/NotFoundError');
 
-// Helper function for formatting user response
-const formatUserResponse = (user) => ({
-  name: {
-    first: user.name.first,
-    last: user.name.last,
-    fullName: `${user.name.first} ${user.name.last}`
-  },
-  email: user.email,
-  phoneNumber: user.phoneNumber,
-  department: user.department,
-  position: user.position,
-  employeeId: user.employeeId,
-  isActive: user.isActive,
-  joiningDate: user.joiningDate,
-  address: user.address,
-  emergencyContact: user.emergencyContact,
-  skills: user.skills,
-  education: user.education.map(({ degree, institution, year }) => ({
-    degree,
-    institution,
-    year
-  })),
-  socialMedia: user.socialMedia,
-  notes: user.notes,
-  createdAt: user.createdAt,
-  updatedAt: user.updatedAt
-});
-
-// Controller methods
 const userController = {
-  // Create user
   createUser: async (req, res, next) => {
     try {
-      const user = await User.create(req.body);
+      const user = await userService.createUser(req.body);
       res.status(201).json({
         status: 'success',
         message: 'User created successfully',
@@ -46,10 +18,9 @@ const userController = {
     }
   },
 
-  // Get all users
   getAllUsers: async (req, res, next) => {
     try {
-      const users = await User.find().lean();
+      const users = await userService.getAllUsers();
       res.json({
         status: 'success',
         message: 'Users retrieved successfully',
@@ -62,16 +33,9 @@ const userController = {
     }
   },
 
-  // Get user by ID
   getUserById: async (req, res, next) => {
     try {
-      const user = await User.findOne({ employeeId: req.params.employeeId }).lean();
-      if (!user) {
-        return res.status(404).json({
-          status: 'error',
-          message: 'User not found'
-        });
-      }
+      const user = await userService.getUserById(req.params.employeeId);
       res.json({
         status: 'success',
         message: 'User retrieved successfully',
@@ -84,22 +48,9 @@ const userController = {
     }
   },
 
-  // Update user
   updateUser: async (req, res, next) => {
     try {
-      const user = await User.findOneAndUpdate(
-        { employeeId: req.params.employeeId },
-        req.body,
-        { new: true, runValidators: true }
-      ).lean();
-
-      if (!user) {
-        return res.status(404).json({
-          status: 'error',
-          message: 'User not found'
-        });
-      }
-
+      const user = await userService.updateUser(req.params.employeeId, req.body);
       res.json({
         status: 'success',
         message: 'User updated successfully',
@@ -112,16 +63,9 @@ const userController = {
     }
   },
 
-  // Delete user
   deleteUser: async (req, res, next) => {
     try {
-      const user = await User.findOneAndDelete({ employeeId: req.params.employeeId });
-      if (!user) {
-        return res.status(404).json({
-          status: 'error',
-          message: `User with ID ${req.params.employeeId} not found`
-        });
-      }
+      await userService.deleteUser(req.params.employeeId);
       res.json({
         status: 'success',
         message: `User with ID ${req.params.employeeId} deleted successfully`,
@@ -134,19 +78,12 @@ const userController = {
     }
   },
 
-  // Delete all users
   deleteAllUsers: async (req, res, next) => {
     try {
-      const result = await User.deleteMany({});
-      if (result.deletedCount === 0) {
-        return res.status(404).json({
-          status: 'error',
-          message: 'No users found to delete'
-        });
-      }
+      const result = await userService.deleteAllUsers();
       res.json({
         status: 'success',
-        message: `All users deleted successfully`,
+        message: 'All users deleted successfully',
         data: {
           deletedCount: result.deletedCount
         }
@@ -157,4 +94,8 @@ const userController = {
   }
 };
 
+
 module.exports = userController;
+
+
+

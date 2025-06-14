@@ -2,27 +2,35 @@
 
 A RESTful API for managing user data with MongoDB.
 
+## Live API URL
+
+https://user-management-hjhedkkmu-reannn22s-projects.vercel.app/
+
 ## Setup and Installation
 
 1. Clone the repository
+
 ```bash
 git clone https://github.com/Reannn22/reannn22skilltest.git
 cd backendskilltest
 ```
 
 2. Install dependencies
+
 ```bash
 npm install
 ```
 
 3. Configure environment variables
-Create a `.env` file in the root directory:
+   Create a `.env` file in the root directory:
+
 ```env
 MONGODB_URI=your_mongodb_connection_string
 PORT=3000
 ```
 
 4. Run the application
+
 ```bash
 # Development
 npm run dev
@@ -34,6 +42,7 @@ npm start
 ## API Documentation
 
 ### Base URL
+
 ```
 http://localhost:3000/api/users
 ```
@@ -41,9 +50,11 @@ http://localhost:3000/api/users
 ### Endpoints
 
 #### 1. Create User
+
 - **Method:** POST
 - **Endpoint:** `/`
 - **Body:**
+
 ```json
 {
   "name": {
@@ -73,11 +84,13 @@ http://localhost:3000/api/users
     "phoneNumber": "1234567890"
   },
   "skills": ["JavaScript", "Node.js"],
-  "education": [{
-    "degree": "Bachelor",
-    "institution": "University",
-    "year": 2020
-  }],
+  "education": [
+    {
+      "degree": "Bachelor",
+      "institution": "University",
+      "year": 2020
+    }
+  ],
   "socialMedia": {
     "linkedin": "linkedin.com/johndoe",
     "twitter": "@johndoe",
@@ -88,23 +101,28 @@ http://localhost:3000/api/users
 ```
 
 #### 2. Get All Users
+
 - **Method:** GET
 - **Endpoint:** `/`
 
 #### 3. Get User by ID
+
 - **Method:** GET
 - **Endpoint:** `/:employeeId`
 
 #### 4. Update User
+
 - **Method:** PUT
 - **Endpoint:** `/:employeeId`
 - **Body:** Same as Create User
 
 #### 5. Delete User
+
 - **Method:** DELETE
 - **Endpoint:** `/:employeeId`
 
 #### 6. Delete All Users
+
 - **Method:** DELETE
 - **Endpoint:** `/`
 
@@ -118,6 +136,8 @@ http://localhost:3000/api/users
 - EmployeeId is required and must be unique
 
 ## API Documentation with Examples
+
+Note: Replace `http://localhost:3000` with `https://user-management-hjhedkkmu-reannn22s-projects.vercel.app` for production API.
 
 ### 1. Create User (POST /api/users)
 
@@ -168,6 +188,7 @@ curl -X POST \
 ```
 
 Success Response:
+
 ```json
 {
   "status": "success",
@@ -202,11 +223,13 @@ Success Response:
         "phoneNumber": "1234567890"
       },
       "skills": ["JavaScript", "Node.js"],
-      "education": [{
-        "degree": "Bachelor",
-        "institution": "University",
-        "year": 2020
-      }],
+      "education": [
+        {
+          "degree": "Bachelor",
+          "institution": "University",
+          "year": 2020
+        }
+      ],
       "socialMedia": {
         "linkedin": "linkedin.com/johndoe",
         "twitter": "@johndoe",
@@ -225,6 +248,7 @@ curl -X GET http://localhost:3000/api/users/EMP011
 ```
 
 Success Response:
+
 ```json
 {
   "status": "success",
@@ -259,11 +283,13 @@ Success Response:
         "phoneNumber": "1234567890"
       },
       "skills": ["JavaScript", "Node.js"],
-      "education": [{
-        "degree": "Bachelor",
-        "institution": "University",
-        "year": 2020
-      }],
+      "education": [
+        {
+          "degree": "Bachelor",
+          "institution": "University",
+          "year": 2020
+        }
+      ],
       "socialMedia": {
         "linkedin": "linkedin.com/johndoe",
         "twitter": "@johndoe",
@@ -282,6 +308,7 @@ curl -X GET http://localhost:3000/api/users/
 ```
 
 Success Response:
+
 ```json
 {
   "status": "success",
@@ -317,11 +344,13 @@ Success Response:
           "phoneNumber": "1234567890"
         },
         "skills": ["JavaScript", "Node.js"],
-        "education": [{
-          "degree": "Bachelor",
-          "institution": "University",
-          "year": 2020
-        }],
+        "education": [
+          {
+            "degree": "Bachelor",
+            "institution": "University",
+            "year": 2020
+          }
+        ],
         "socialMedia": {
           "linkedin": "linkedin.com/johndoe",
           "twitter": "@johndoe",
@@ -383,6 +412,7 @@ curl -X PUT \
 ```
 
 Success Response:
+
 ```json
 {
   "status": "success",
@@ -417,11 +447,13 @@ Success Response:
         "phoneNumber": "1234567890"
       },
       "skills": ["JavaScript", "Node.js", "React"],
-      "education": [{
-        "degree": "Bachelor",
-        "institution": "University",
-        "year": 2020
-      }],
+      "education": [
+        {
+          "degree": "Bachelor",
+          "institution": "University",
+          "year": 2020
+        }
+      ],
       "socialMedia": {
         "linkedin": "linkedin.com/johndoe",
         "twitter": "@johndoe",
@@ -440,6 +472,7 @@ curl -X DELETE http://localhost:3000/api/users/EMP012
 ```
 
 Success Response:
+
 ```json
 {
   "status": "success",
@@ -451,6 +484,7 @@ Success Response:
 ```
 
 Error Response:
+
 ```json
 {
   "status": "error",
@@ -465,6 +499,7 @@ curl -X DELETE http://localhost:3000/api/users
 ```
 
 Success Response:
+
 ```json
 {
   "status": "success",
@@ -492,6 +527,7 @@ All API endpoints return responses in a consistent format:
 ## Error Handling
 
 The API handles various error scenarios:
+
 - 404: Resource not found
 - 400: Validation errors
 - 500: Server errors
@@ -499,31 +535,34 @@ The API handles various error scenarios:
 ## Docker Support
 
 Build and run with Docker:
-```bash
+
+````bash
 # Build image
 docker build -t user-management-api .
 
-# Run container
+# Run container```
 docker run -p 4000:4000 -e MONGODB_URI=your_mongodb_uri user-management-api
-```
-
-## Deployment
-
+oyment
 Deploy to Vercel:
 ```bash
-# Install Vercel CLI
-npm install -g vercel
-
+# Install Vercel CLI```bash
+npm install -g vercell Vercel CLI
+g vercel
 # Deploy
-vercel --prod
+vercel --prod# Deploy
+````
+
 ```
-
 ## Technologies Used
-
+ies Used
 - Node.js
 - Express.js
 - MongoDB
-- Mongoose
-- Express Validator
-- Docker
+- MongooseB
+- Express Validatorse
+- Docker- Express Validator
+
+
+- Vercel- Docker
 - Vercel
+```

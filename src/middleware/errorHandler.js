@@ -1,5 +1,14 @@
+const NotFoundError = require('../errors/NotFoundError');
+
 const errorHandler = (err, req, res, next) => {
   console.error(err.stack);
+
+  if (err instanceof NotFoundError) {
+    return res.status(404).json({
+      status: 'error',
+      message: err.message
+    });
+  }
 
   if (err.name === 'ValidationError') {
     return res.status(400).json({
