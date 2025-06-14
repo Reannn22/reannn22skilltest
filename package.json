@@ -8,7 +8,7 @@
     "build": "npm install",
     "vercel-build": "echo 'Building...'",
     "deploy": "vercel deploy --prod",
-    "test": "jest --coverage --detectOpenHandles --forceExit",
+    "test": "jest --detectOpenHandles --forceExit",
     "test:watch": "jest --watch",
     "test:coverage": "jest --coverage"
   },
