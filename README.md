@@ -4,7 +4,7 @@ A RESTful API service for managing user data with comprehensive CRUD operations,
 
 ## Live Demo
 
-- Production URL: https://user-management-44dwd8a0s-reannn22s-projects.vercel.app/api/users
+- Production URL: https://user-management-gh1mxtbje-reannn22s-projects.vercel.app/api/users
 
 ## Technology Stack
 
