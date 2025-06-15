@@ -2,7 +2,7 @@
 	"info": {
 		"_postman_id": "e4afcd61-fbfd-4a11-8bc1-6c2c4c119c99",
 		"name": "Users API",
-		"description": "API User Management ini adalah layanan RESTful sederhana yang menyediakan endpoint untuk mengelola data pengguna, termasuk operasi Create, Read, Update, dan Delete (CRUD). Setiap pengguna memiliki atribut nama, email unik, nomor telepon, status aktif, dan departemen. API ini dilengkapi dengan validasi input seperti format email yang valid dan minimal 10 digit angka untuk nomor telepon. Seluruh response error ditangani dengan pesan yang informatif. Dokumentasi API disediakan dalam bentuk Postman Collection, dan aplikasi telah dideploy ke Vercel dan dapat diakses melalui URL produksi: [https://user-management-8t4dze4j4-reannn22s-projects.vercel.app/](https://user-management-44dwd8a0s-reannn22s-projects.vercel.app/api/users).",
+		"description": "API User Management ini adalah layanan RESTful sederhana yang menyediakan endpoint untuk mengelola data pengguna, termasuk operasi Create, Read, Update, dan Delete (CRUD). Setiap pengguna memiliki atribut nama, email unik, nomor telepon, status aktif, dan departemen. API ini dilengkapi dengan validasi input seperti format email yang valid dan minimal 10 digit angka untuk nomor telepon. Seluruh response error ditangani dengan pesan yang informatif. Dokumentasi API disediakan dalam bentuk Postman Collection, dan aplikasi telah dideploy ke Vercel dan dapat diakses melalui URL produksi: [https://user-management-gh1mxtbje-reannn22s-projects.vercel.app/api/users].",
 		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
 		"_exporter_id": "37563138"
 	},
