@@ -1,26 +1,18 @@
 const User = require('../models/User');
 const NotFoundError = require('../errors/NotFoundError');
-const redisClient = require('../config/redis');
-
-const CACHE_TTL = 3600; // 1 hour in seconds
+const cacheService = require('./cacheService');
 
 class UserService {
   async createUser(userData) {
     const user = await User.create(userData);
-    // Invalidate users list cache
-    await redisClient.del('users:all');
+    await cacheService.deleteCache('users:all');
     return user;
   }
   
   async getAllUsers() {
-    // Try to get from cache first
-    const cachedUsers = await redisClient.get('users:all');
+    const cachedUsers = await cacheService.getCache('users:all');
     if (cachedUsers) {
-      const users = JSON.parse(cachedUsers);
-      if (users.length === 0) {
-        throw new NotFoundError('No users found');
-      }
-      return users;
+      return cachedUsers;
     }
 
     const users = await User.find().lean();
@@ -28,16 +20,15 @@ class UserService {
       throw new NotFoundError('No users found');
     }
 
-    // Store in cache
-    await redisClient.setex('users:all', CACHE_TTL, JSON.stringify(users));
+    await cacheService.setCache('users:all', users);
     return users;
   }
 
   async getUserById(employeeId) {
-    // Try to get from cache first
-    const cachedUser = await redisClient.get(`user:${employeeId}`);
+    const cacheKey = `user:${employeeId}`;
+    const cachedUser = await cacheService.getCache(cacheKey);
     if (cachedUser) {
-      return JSON.parse(cachedUser);
+      return cachedUser;
     }
 
     const user = await User.findOne({ employeeId }).lean();
@@ -45,8 +36,7 @@ class UserService {
       throw new NotFoundError(`User with ID ${employeeId} not found`);
     }
 
-    // Store in cache
-    await redisClient.setex(`user:${employeeId}`, CACHE_TTL, JSON.stringify(user));
+    await cacheService.setCache(cacheKey, user);
     return user;
   }
 
@@ -61,10 +51,9 @@ class UserService {
       throw new NotFoundError(`User with ID ${employeeId} not found`);
     }
 
-    // Invalidate caches
     await Promise.all([
-      redisClient.del(`user:${employeeId}`),
-      redisClient.del('users:all')
+      cacheService.deleteCache(`user:${employeeId}`),
+      cacheService.deleteCache('users:all')
     ]);
 
     return user;
@@ -76,10 +65,9 @@ class UserService {
       throw new NotFoundError(`User with ID ${employeeId} not found`);
     }
 
-    // Invalidate caches
     await Promise.all([
-      redisClient.del(`user:${employeeId}`),
-      redisClient.del('users:all')
+      cacheService.deleteCache(`user:${employeeId}`),
+      cacheService.deleteCache('users:all')
     ]);
 
     return user;
@@ -91,12 +79,8 @@ class UserService {
       throw new NotFoundError('No users to delete');
     }
 
-    // Clear all user-related caches
-    const keys = await redisClient.keys('user:*');
-    if (keys && keys.length > 0) {
-      await Promise.all(keys.map(key => redisClient.del(key)));
-    }
-    await redisClient.del('users:all');
+    await cacheService.deleteCachePattern('user:*');
+    await cacheService.deleteCache('users:all');
 
     return result;
   }
