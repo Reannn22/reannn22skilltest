@@ -414,11 +414,14 @@ REDIS_URL=your_upstash_redis_url
 You can use either local Redis for development or Upstash Redis for production:
 
 1. Local Redis:
+
 ```bash
 REDIS_URL=redis://localhost:6379
 ```
 
 2. Upstash Redis:
+
 ```bash
 REDIS_URL=rediss://username:password@your-redis-host:port
 ```
+
