@@ -4,12 +4,13 @@ A RESTful API service for managing user data with comprehensive CRUD operations,
 
 ## Live Demo
 
-- Production URL: https://user-management-8t4dze4j4-reannn22s-projects.vercel.app/api/users
+- Production URL: https://user-management-j3mu91ggk-reannn22s-projects.vercel.app/api/users
 
 ## Technology Stack
 
 - **Backend Framework**: Node.js (v18+) with Express.js
 - **Database**: MongoDB with Mongoose ODM
+- **Caching**: Redis with ioredis
 - **Validation**: Express Validator
 - **Testing**: Jest & Supertest
 - **API Documentation**: Postman Collection
@@ -22,7 +23,8 @@ A RESTful API service for managing user data with comprehensive CRUD operations,
 - ✅ Complete CRUD operations for user management
 - 🔒 Input validation and error handling
 - 📝 Extensive user data model
-- 🚀 Docker support
+- 💨 Redis caching for improved performance
+- 🐳 Docker support with Redis container
 - 📚 API documentation (Postman Collection)
 
 ## Required Endpoints
@@ -52,6 +54,7 @@ Required fields:
 
 - Node.js >= 18
 - MongoDB
+- Redis >= 6.0
 - Docker (optional)
 
 ### Installation
@@ -75,6 +78,9 @@ npm install
 # Create .env file
 MONGODB_URI=your_mongodb_uri
 PORT=3001
+REDIS_HOST=localhost
+REDIS_PORT=6379
+REDIS_PASSWORD=your_redis_password
 ```
 
 4. Run application:
@@ -90,12 +96,16 @@ npm start
 ### Docker Setup
 
 ```bash
-# Build image
-docker build -t user-management-api .
+# Build and run with Docker Compose (includes Redis)
+docker-compose up -d
 
-# Run container
+# Or build and run manually
+docker build -t user-management-api .
 docker run -p 3001:3001 \
   -e MONGODB_URI="your_mongodb_uri" \
+  -e REDIS_HOST="redis" \
+  -e REDIS_PORT="6379" \
+  -e REDIS_PASSWORD="your_redis_password" \
   user-management-api
 ```
 
@@ -286,38 +296,42 @@ npm run test:watch
 ```
 backendskilltest/
 ├── src/
-│   ├── controllers/          # Request handlers
+│   ├── config/              # Configuration files
+│   │   └── redis.js        # Redis client setup
+│   ├── controllers/         # Request handlers
 │   │   └── userController.js
-│   ├── models/              # Database schemas
+│   ├── models/             # Database schemas
 │   │   └── User.js
-│   ├── routes/              # API routes
+│   ├── routes/             # API routes
 │   │   └── userRoutes.js
-│   ├── middleware/          # Custom middleware
+│   ├── middleware/         # Custom middleware
 │   │   └── errorHandler.js
-│   ├── services/           # Business logic
-│   │   └── userService.js
-│   ├── utils/              # Helper functions
+│   ├── services/          # Business logic
+│   │   └── userService.js # Includes Redis caching
+│   ├── utils/             # Helper functions
 │   │   └── formatUser.js
-│   ├── errors/             # Custom error classes
+│   ├── errors/            # Custom error classes
 │   │   └── NotFoundError.js
-│   ├── app.js             # Express app setup
-│   └── index.js           # Server entry point
-├── tests/                  # Test suites
+│   ├── app.js            # Express app setup
+│   └── index.js          # Server entry point
+├── tests/                 # Test suites
 │   ├── user.test.js
 │   ├── model.test.js
 │   └── middleware.test.js
-├── .env                    # Environment variables
-├── .env.test              # Test environment variables
-├── .gitignore             # Git ignore rules
-├── Dockerfile             # Docker configuration
-├── docker-compose.yml     # Docker compose config
-├── jest.config.js         # Jest test configuration
-├── package.json           # Project dependencies
-└── README.md             # Documentation
+├── .env                   # Environment variables
+├── .env.test             # Test environment variables
+├── .gitignore            # Git ignore rules
+├── Dockerfile            # Docker configuration
+├── docker-compose.yml    # Docker compose config (includes Redis)
+├── jest.config.js        # Jest test configuration
+├── package.json          # Project dependencies
+└── README.md            # Documentation
 ```
 
 ### Key Components
 
+- **config/redis.js**: Redis client configuration and connection setup
+- **services/userService.js**: Implements Redis caching strategy
 - **controllers/**: Business logic and request handling
 - **models/**: Database schemas and models
 - **routes/**: API endpoint definitions
@@ -340,3 +354,35 @@ vercel --prod
 ## Author
 
 [Reyhan](https://github.com/Reannn22)
+
+## Caching with Redis (Upstash)
+
+This project uses [Upstash Redis](https://upstash.com/) for caching:
+
+- **Global Caching**: Using Upstash Redis for serverless caching
+- **Cache Duration**: 1 hour TTL for cached data
+- **Cached Data**:
+  - User lists
+  - Individual user details
+  - Automatic cache invalidation on updates
+
+### Redis Configuration
+
+1. Environment Setup
+```env
+REDIS_URL=your_upstash_redis_url
+```
+
+2. Cache Implementation
+- GET requests: Check cache first
+- POST/PUT/DELETE: Invalidate related cache
+- Automatic error handling & fallback
+
+### Cache Strategy
+
+- List Cache Key: `users:all`
+- User Cache Key: `user:{employeeId}`
+- Cache Invalidation:
+  - On Create: Clear `users:all`
+  - On Update: Clear `user:{id}` and `users:all`
+  - On Delete: Clear all related keys
