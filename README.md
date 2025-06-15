@@ -72,18 +72,38 @@ cd backendskilltest
 npm install
 ```
 
-3. Configure environment:
+3. Set up Redis with Upstash:
+
+```bash
+# Option 1: Local Redis Installation
+# For Windows:
+1. Download Redis for Windows from https://github.com/microsoftarchive/redis/releases
+2. Run redis-server.exe to start Redis locally
+
+# For Linux:
+sudo apt-get install redis-server
+sudo systemctl start redis-server
+
+# For macOS:
+brew install redis
+brew services start redis
+
+# Option 2: Upstash Redis (Recommended for production)
+1. Create account at https://upstash.com/
+2. Create new Redis database
+3. Copy the REDIS_URL from your database details
+```
+
+4. Configure environment:
 
 ```bash
 # Create .env file
 MONGODB_URI=your_mongodb_uri
 PORT=3001
-REDIS_HOST=localhost
-REDIS_PORT=6379
-REDIS_PASSWORD=your_redis_password
+REDIS_URL=your_upstash_redis_url  # Add this line for Redis configuration
 ```
 
-4. Run application:
+5. Run application:
 
 ```bash
 # Development
@@ -388,3 +408,17 @@ REDIS_URL=your_upstash_redis_url
   - On Create: Clear `users:all`
   - On Update: Clear `user:{id}` and `users:all`
   - On Delete: Clear all related keys
+
+### Redis Configuration Options
+
+You can use either local Redis for development or Upstash Redis for production:
+
+1. Local Redis:
+```bash
+REDIS_URL=redis://localhost:6379
+```
+
+2. Upstash Redis:
+```bash
+REDIS_URL=rediss://username:password@your-redis-host:port
+```
