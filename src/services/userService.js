@@ -16,11 +16,15 @@ class UserService {
     // Try to get from cache first
     const cachedUsers = await redisClient.get('users:all');
     if (cachedUsers) {
-      return JSON.parse(cachedUsers);
+      const users = JSON.parse(cachedUsers);
+      if (users.length === 0) {
+        throw new NotFoundError('No users found');
+      }
+      return users;
     }
 
     const users = await User.find().lean();
-    if (users.length === 0) {
+    if (!users || users.length === 0) {
       throw new NotFoundError('No users found');
     }
 
@@ -88,11 +92,10 @@ class UserService {
     }
 
     // Clear all user-related caches
-    await redisClient.keys('user:*').then(keys => {
-      if (keys.length > 0) {
-        return redisClient.del(keys);
-      }
-    });
+    const keys = await redisClient.keys('user:*');
+    if (keys && keys.length > 0) {
+      await Promise.all(keys.map(key => redisClient.del(key)));
+    }
     await redisClient.del('users:all');
 
     return result;

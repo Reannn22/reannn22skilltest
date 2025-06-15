@@ -369,11 +369,13 @@ This project uses [Upstash Redis](https://upstash.com/) for caching:
 ### Redis Configuration
 
 1. Environment Setup
+
 ```env
 REDIS_URL=your_upstash_redis_url
 ```
 
 2. Cache Implementation
+
 - GET requests: Check cache first
 - POST/PUT/DELETE: Invalidate related cache
 - Automatic error handling & fallback

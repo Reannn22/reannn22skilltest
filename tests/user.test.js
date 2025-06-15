@@ -4,6 +4,14 @@ const { MongoMemoryServer } = require('mongodb-memory-server');
 const app = require('../src/app');
 const User = require('../src/models/User');
 
+// Mock Redis client
+jest.mock('../src/config/redis', () => ({
+  get: jest.fn(),
+  setex: jest.fn(),
+  del: jest.fn().mockResolvedValue('OK'),
+  keys: jest.fn().mockResolvedValue([]),
+}));
+
 let mongoServer;
 
 beforeAll(async () => {
@@ -28,6 +36,10 @@ afterAll(async () => {
 
 beforeEach(async () => {
   await User.deleteMany({});
+  // Reset Redis mock
+  const redisClient = require('../src/config/redis');
+  jest.clearAllMocks();
+  redisClient.get.mockResolvedValue(null);
 });
 
 const testUser = {
@@ -136,11 +148,12 @@ describe('User API Tests', () => {
     });
     
     it('should return 404 if no users found', async () => {
-     const res = await request(app).get('/api/users');
+      await User.deleteMany({}); // Ensure no users exist
+      const res = await request(app).get('/api/users');
 
-     expect(res.status).toBe(404);
-     expect(res.body.status).toBe('error');
-     expect(res.body.message).toBe('No users found'); // tergantung isi pesan di NotFoundError
+      expect(res.status).toBe(404);
+      expect(res.body.status).toBe('error');
+      expect(res.body.message).toBe('No users found');
     });
   });
 

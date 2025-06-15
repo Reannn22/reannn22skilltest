@@ -29,6 +29,12 @@ const userController = {
         }
       });
     } catch (error) {
+      if (error instanceof NotFoundError) {
+        return res.status(404).json({
+          status: 'error',
+          message: error.message
+        });
+      }
       next(error);
     }
   },
