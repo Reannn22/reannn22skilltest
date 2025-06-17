@@ -348,6 +348,19 @@ backendskilltest/
 └── README.md            # Documentation
 ```
 
+### Docker Commands
+
+```bash
+# Build Docker image
+docker build -t user-management-api .
+
+# Run Docker container with environment variables
+docker run -p 3001:3001 \
+  -e MONGODB_URI="mongodb+srv://reyhan123140022:t9JyfK1LQTI8zops@cluster0.i2yv1.mongodb.net/skilltest?retryWrites=true&w=majority&appName=Cluster0" \
+  -e REDIS_URL="rediss://default:AW-nAAIjcDE0MGQzN2I1M2UwYzg0ODAzODYxNmNlYzMxNmY3ZTkzYXAxMA@crisp-whippet-28583.upstash.io:6379" \
+  user-management-api
+```
+
 ### Key Components
 
 - **config/redis.js**: Redis client configuration and connection setup
